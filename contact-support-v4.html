@@ -294,6 +294,7 @@ body {
 /* Header row background tint */
 .trow.head .tcell { background: var(--container-02); }
 
+.tcell { transition: background 0.15s ease; }
 .check-circle { width: 24px; height: 24px; flex-shrink: 0; }
 
 /* Footer note */
@@ -650,6 +651,19 @@ body {
     const col = th.getAttribute('data-col');
     th.addEventListener('mouseenter', () => applyHover(col, true));
     th.addEventListener('mouseleave', () => applyHover(col, false));
+  });
+
+  // Also trigger from body cells so the entire column is hoverable
+  bodyRows.forEach(row => {
+    const cells = row.querySelectorAll('.tcell');
+    // cells[0] is the label — skip it; cells[1..4] map to cols 1..4
+    cells.forEach((cell, i) => {
+      if (i === 0) return; // skip the channel name cell
+      const col = String(i);
+      cell.style.cursor = 'default';
+      cell.addEventListener('mouseenter', () => applyHover(col, true));
+      cell.addEventListener('mouseleave', () => applyHover(col, false));
+    });
   });
 
   /* modal */
