@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Support – V2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:           #f8f5ee;
+  --bg-01:        #fcfcfa;
+  --bg-03:        #f8f5ee;
+  --bg-accent-01: #b9cdbe;
+  --container-01: #ffffff;
+  --container-02: #f6f9fc;
+  --border-03:    #dbe4ed;
+  --border-soft:  rgba(0,0,0,0.11);
+  --text-01:      #1f1f1f;
+  --text-02:      rgba(0,0,0,0.62);
+  --orange:       #ff4800;
+  --link-underline: #ff4800;
+  --font:         'Lexend Deca', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  color: var(--text-01);
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px 64px;
+}
+
+/* ─── OUTER WRAPPER ─── */
+.page {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── CONTENT CONTAINER (header area) ─── */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Tagline pill */
+.tagline {
+  background: var(--container-02);
+  border: 1px solid var(--border-03);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 14px;
+  line-height: 22px;
+  white-space: nowrap;
+  color: var(--text-01);
+}
+.tagline a {
+  color: var(--orange);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  cursor: pointer;
+}
+
+/* Page heading */
+.page-heading {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 44px;
+  color: var(--text-01);
+  text-align: center;
+}
+
+/* Subheading */
+.page-sub {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 32px;
+  color: var(--text-01);
+  text-align: center;
+}
+
+/* ─── CARDS SECTION ─── */
+.cards-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+}
+
+/* Troubleshooting banner */
+.trouble-card {
+  background: var(--bg-01);
+  border: 2px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  color: var(--text-01);
+  width: 100%;
+  max-width: 680px;
+}
+.trouble-card a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--text-01);
+  color: var(--text-01);
+  cursor: pointer;
+}
+
+/* Two-column row */
+.cards-row {
+  display: grid;
+  grid-template-columns: 1fr 500px;
+  gap: 28px;
+  width: 100%;
+  align-items: stretch;
+}
+
+/* Left column stacks two cards */
+.left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ─── SHARED CARD ─── */
+.card {
+  background: var(--container-01);
+  border: 2px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Card header block */
+.card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--text-01);
+}
+
+.card-sub {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-01);
+}
+
+.card-divider {
+  height: 1px;
+  background: var(--border-03);
+  width: 100%;
+  margin-top: 2px;
+}
+
+/* ─── TEXT LINKS ROW ─── */
+.links-row {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.text-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--text-01);
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline);
+  cursor: pointer;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  font-family: var(--font);
+}
+
+.text-link svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--text-01);
+  flex-shrink: 0;
+}
+
+/* ─── UPGRADE INNER CARD ─── */
+.upgrade-card {
+  background: var(--bg-01);
+  border: 2px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-01);
+}
+.upgrade-card a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--text-01);
+  color: var(--text-01);
+  cursor: pointer;
+}
+
+/* ─── PHONE SUPPORT SECTION (Pro/Enterprise right card) ─── */
+.right-card {
+  background: var(--container-01);
+  border: 2px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 500px;
+  align-self: stretch;
+}
+
+.right-card-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+/* Phone support sub-card */
+.phone-subcard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.phone-subcard-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--text-01);
+}
+
+.phone-row {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Dropdown input */
+.select-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.country-select {
+  width: 100%;
+  height: 40px;
+  background: rgba(255,255,255,0.46);
+  border: 1px solid rgba(0,0,0,0.47);
+  border-radius: 4px;
+  padding: 0 40px 0 16px;
+  font-size: 16px;
+  font-family: var(--font);
+  font-weight: 300;
+  color: var(--text-01);
+  line-height: 28px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 24px;
+  height: 24px;
+}
+
+.phone-number {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--text-01);
+  white-space: nowrap;
+}
+
+.phone-note {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-02);
+}
+
+/* ─── PREMIUM INNER CARD ─── */
+.premium-card {
+  background: var(--bg-03);
+  border: 2px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.premium-header-row {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.premium-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--text-01);
+  white-space: nowrap;
+}
+
+.premium-tag {
+  background: var(--bg-accent-01);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--text-01);
+  white-space: nowrap;
+}
+
+.premium-phone-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  gap: 16px;
+}
+
+.premium-phone-label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: var(--text-01);
+}
+
+.premium-phone-number {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--text-01);
+}
+
+.premium-phone-note {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-02);
+}
+
+.premium-instructions {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--text-02);
+}
+
+/* ─── FOOTER ─── */
+.footer-note {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 22px;
+  color: var(--text-02);
+  text-align: center;
+  width: 100%;
+}
+
+.footer-note a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--text-01);
+  color: var(--text-02);
+  cursor: pointer;
+}
+
+/* ─── PROTOTYPE MODAL ─── */
+.proto-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(31,31,31,0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.proto-overlay.open { display: flex; }
+
+.proto-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  box-shadow: 0 8px 40px rgba(31,31,31,0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: pop-in 0.18s ease;
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.proto-modal-icon {
+  width: 40px; height: 40px;
+  background: #fff4f0;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.proto-modal-icon svg { width: 20px; height: 20px; }
+
+.proto-modal-title {
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24px;
+  color: #1f1f1f;
+}
+
+.proto-modal-body {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 22px;
+  color: #555;
+}
+
+.proto-modal-footer { display: flex; justify-content: flex-end; padding-top: 4px; }
+
+.proto-modal-btn {
+  background: #1f1f1f;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 22px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.proto-modal-btn:hover { background: #3a3a3a; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+  .cards-row {
+    grid-template-columns: 1fr;
+  }
+  .right-card { width: 100%; }
+  .premium-phone-row { flex-wrap: wrap; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="content-container">
+    <div class="tagline">
+      <a href="#">Log in</a> for personalized support options
+    </div>
+    <h1 class="page-heading">Get the help you need</h1>
+    <p class="page-sub">Select your account type to see the support options available to you.</p>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards-section">
+
+    <!-- Troubleshooting banner -->
+    <div class="trouble-card">
+      Having trouble logging in? <a href="#">Try these troubleshooting steps</a>
+    </div>
+
+    <!-- Two-col row -->
+    <div class="cards-row">
+
+      <!-- LEFT: Free + Starter stacked -->
+      <div class="left-col">
+
+        <!-- Free card -->
+        <div class="card">
+          <div class="card-header">
+            <p class="card-title">Free</p>
+            <p class="card-sub">Free tools &amp; View-only seats</p>
+            <div class="card-divider"></div>
+          </div>
+          <div class="links-row">
+            <span class="text-link" role="button">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 1.5a6.5 6.5 0 0 1 5.23 10.37C12.2 10.4 10.23 9.5 8 9.5s-4.2.9-5.23 2.37A6.5 6.5 0 0 1 8 1.5zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>
+              View Community
+            </span>
+          </div>
+          <div class="upgrade-card">
+            <a href="#">Upgrade</a> for more channels
+          </div>
+        </div>
+
+        <!-- Starter card -->
+        <div class="card">
+          <div class="card-header">
+            <p class="card-title">Starter</p>
+            <p class="card-sub">Starter subscription</p>
+            <div class="card-divider"></div>
+          </div>
+          <div class="links-row">
+            <span class="text-link" role="button">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 1.5a6.5 6.5 0 0 1 5.23 10.37C12.2 10.4 10.23 9.5 8 9.5s-4.2.9-5.23 2.37A6.5 6.5 0 0 1 8 1.5zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>
+              View Community
+            </span>
+            <span class="text-link" role="button">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 2h-11A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 13.5 2zm0 1.5L8 8.34 2.5 3.5h11zM2.5 12.5v-7.4l5.19 4.56a.5.5 0 0 0 .62 0L13.5 5.1v7.4h-11z"/></svg>
+              Send email
+            </span>
+            <span class="text-link" role="button">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14 1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2v3l3-3h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 8.5H5.62L4.5 10.62V9.5H2.5v-7h11v7z"/></svg>
+              Start chat
+            </span>
+          </div>
+          <div class="upgrade-card">
+            <a href="#">Upgrade</a> for more channels
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Professional / Enterprise -->
+      <div class="right-card">
+
+        <div class="card-header">
+          <p class="card-title">Professional / Enterprise</p>
+          <p class="card-sub">Pro or Enterprise subscription</p>
+          <div class="card-divider"></div>
+        </div>
+
+        <div class="right-card-inner">
+
+          <!-- Channel links -->
+          <div class="links-row">
+            <span class="text-link" role="button">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 1.5a6.5 6.5 0 0 1 5.23 10.37C12.2 10.4 10.23 9.5 8 9.5s-4.2.9-5.23 2.37A6.5 6.5 0 0 1 8 1.5zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>
+              View Community
+            </span>
+            <span class="text-link" role="button">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 2h-11A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 13.5 2zm0 1.5L8 8.34 2.5 3.5h11zM2.5 12.5v-7.4l5.19 4.56a.5.5 0 0 0 .62 0L13.5 5.1v7.4h-11z"/></svg>
+              Send email
+            </span>
+            <span class="text-link" role="button">
+              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14 1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2v3l3-3h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 8.5H5.62L4.5 10.62V9.5H2.5v-7h11v7z"/></svg>
+              Start chat
+            </span>
+          </div>
+
+          <!-- Phone support sub-card -->
+          <div class="phone-subcard">
+            <p class="phone-subcard-title">Phone Support</p>
+            <div class="phone-row">
+              <div class="select-wrap">
+                <select class="country-select" id="country-select">
+                  <option value="us">United States</option>
+                  <option value="au">Australia</option>
+                  <option value="at">Austria</option>
+                  <option value="be">Belgium</option>
+                  <option value="br">Brazil</option>
+                  <option value="ca">Canada</option>
+                  <option value="cl">Chile</option>
+                  <option value="co">Colombia</option>
+                  <option value="dk">Denmark</option>
+                  <option value="fi">Finland</option>
+                  <option value="fr">France</option>
+                  <option value="de">Germany</option>
+                  <option value="hk">Hong Kong</option>
+                  <option value="in">India</option>
+                  <option value="id">Indonesia</option>
+                  <option value="ie">Ireland</option>
+                  <option value="il">Israel</option>
+                  <option value="it">Italy</option>
+                  <option value="jp">Japan</option>
+                  <option value="lu">Luxembourg</option>
+                  <option value="my">Malaysia</option>
+                  <option value="mx">Mexico</option>
+                  <option value="nl">Netherlands</option>
+                  <option value="nz">New Zealand</option>
+                  <option value="no">Norway</option>
+                  <option value="pt">Portugal</option>
+                  <option value="sg">Singapore</option>
+                  <option value="za">South Africa</option>
+                  <option value="es">Spain</option>
+                  <option value="se">Sweden</option>
+                  <option value="ch">Switzerland</option>
+                  <option value="ae">UAE</option>
+                  <option value="gb">United Kingdom</option>
+                </select>
+                <svg class="select-arrow" viewBox="0 0 24 24" fill="none">
+                  <path d="M6 9L12 15L18 9" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <p class="phone-number" id="pro-number">1-888-482-7768 x3</p>
+            </div>
+            <p class="phone-note" id="pro-note">Toll free in the US</p>
+          </div>
+
+          <!-- Premium inner card -->
+          <div class="premium-card">
+            <div class="premium-header-row">
+              <p class="premium-title">Premium Support</p>
+              <span class="premium-tag">Add-on plan</span>
+            </div>
+            <div class="premium-phone-row">
+              <p class="premium-phone-label">Dedicated Phone</p>
+              <p class="premium-phone-number" id="premium-number">1-888-482-7768 x4</p>
+              <p class="premium-phone-note" id="premium-note">Toll free in the US</p>
+            </div>
+            <p class="premium-instructions">Select Extension 4 from the main menu. You'll be asked to enter your Hub ID to verify your Premium Support access. Once verified, you'll connect directly to your dedicated team.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER NOTE -->
+  <p class="footer-note">
+    If you have multiple HubSpot products, your support options are based on your highest subscription.<br>
+    <a href="#">Learn more about getting help with HubSpot</a> · <a href="#">Support Hours &amp; Observed Holidays</a>
+  </p>
+
+</div>
+
+<!-- ── PROTOTYPE MODAL ── -->
+<div class="proto-overlay" id="proto-overlay" role="dialog" aria-modal="true" aria-labelledby="proto-title">
+  <div class="proto-modal">
+    <div class="proto-modal-icon">
+      <svg viewBox="0 0 20 20" fill="none">
+        <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm.75 12h-1.5V9.25h1.5V14zm0-6.25h-1.5v-1.5h1.5v1.5z" fill="#FF4800"/>
+      </svg>
+    </div>
+    <p class="proto-modal-title" id="proto-title">This is a prototype</p>
+    <p class="proto-modal-body">You're viewing a prototype. Links and navigation are not active.</p>
+    <div class="proto-modal-footer">
+      <button class="proto-modal-btn" id="proto-close">Ok</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ── PHONE DATA ──
+   * Country list: help.hubspot.com (33 countries)
+   * NOTE FOR TEAM: verify numbers with Support Ops before shipping.
+   * Pro/Enterprise = x3 | Premium = x4
+   */
+  const phones = {
+    us: { pro: '1-888-482-7768 x3', premium: '1-888-482-7768 x4', note: 'Toll free in the US' },
+    ca: { pro: '1-888-482-7768 x3', premium: '1-888-482-7768 x4', note: 'Toll free in Canada' },
+    gb: { pro: '+44 800 032 6560 x3', premium: '+44 800 032 6560 x4', note: 'Toll free in the UK' },
+    au: { pro: '1-800-896-938 x3',   premium: '1-800-896-938 x4',   note: 'Toll free in Australia' },
+    nz: { pro: '0800-171-871 x3',    premium: '0800-171-871 x4',    note: 'Toll free in New Zealand' },
+    de: { pro: '+49 800 000 6982 x3', premium: '+49 800 000 6982 x4', note: 'Toll free in Germany' },
+    fr: { pro: '+33 800 940 692 x3',  premium: '+33 800 940 692 x4',  note: 'Toll free in France' },
+    nl: { pro: '+31 800 020 2202 x3', premium: '+31 800 020 2202 x4', note: 'Toll free in Netherlands' },
+    ie: { pro: '+353 1800 719 566 x3', premium: '+353 1800 719 566 x4', note: 'Toll free in Ireland' },
+    it: { pro: '+39 800 693 076 x3',  premium: '+39 800 693 076 x4',  note: 'Toll free in Italy' },
+    es: { pro: '+34 900 838 597 x3',  premium: '+34 900 838 597 x4',  note: 'Toll free in Spain' },
+    pt: { pro: '+351 800 780 764 x3', premium: '+351 800 780 764 x4', note: 'Toll free in Portugal' },
+    be: { pro: '+32 800 761 45 x3',   premium: '+32 800 761 45 x4',   note: 'Toll free in Belgium' },
+    at: { pro: '+43 800 802 561 x3',  premium: '+43 800 802 561 x4',  note: 'Toll free in Austria' },
+    ch: { pro: '+41 800 000 401 x3',  premium: '+41 800 000 401 x4',  note: 'Toll free in Switzerland' },
+    se: { pro: '+46 200 883 185 x3',  premium: '+46 200 883 185 x4',  note: 'Toll free in Sweden' },
+    no: { pro: '+47 800 16 174 x3',   premium: '+47 800 16 174 x4',   note: 'Toll free in Norway' },
+    dk: { pro: '+45 80 82 00 10 x3',  premium: '+45 80 82 00 10 x4',  note: 'Toll free in Denmark' },
+    fi: { pro: '+358 800 912 683 x3', premium: '+358 800 912 683 x4', note: 'Toll free in Finland' },
+    lu: { pro: '+352 800 277 56 x3',  premium: '+352 800 277 56 x4',  note: 'Toll free in Luxembourg' },
+    br: { pro: '0800 047 4744 x3',    premium: '0800 047 4744 x4',    note: 'Toll free in Brazil' },
+    mx: { pro: '800-461-0524 x3',     premium: '800-461-0524 x4',     note: 'Toll free in Mexico' },
+    co: { pro: '01800-952-1562 x3',   premium: '01800-952-1562 x4',   note: 'Toll free in Colombia' },
+    cl: { pro: '1230-020-9626 x3',    premium: '1230-020-9626 x4',    note: 'Toll free in Chile' },
+    jp: { pro: '0120-700-779 x3',     premium: '0120-700-779 x4',     note: 'Toll free in Japan' },
+    sg: { pro: '800 492 1669 x3',     premium: '800 492 1669 x4',     note: 'Toll free in Singapore' },
+    hk: { pro: '800 960 254 x3',      premium: '800 960 254 x4',      note: 'Toll free in Hong Kong' },
+    in: { pro: '000-800-440-1938 x3', premium: '000-800-440-1938 x4', note: 'Toll free in India' },
+    my: { pro: '1800-81-5083 x3',     premium: '1800-81-5083 x4',     note: 'Toll free in Malaysia' },
+    id: { pro: '007-803-321-5527 x3', premium: '007-803-321-5527 x4', note: 'Toll free in Indonesia' },
+    il: { pro: '1-800-945-503 x3',    premium: '1-800-945-503 x4',    note: 'Toll free in Israel' },
+    za: { pro: '0800-014-564 x3',     premium: '0800-014-564 x4',     note: 'Toll free in South Africa' },
+    ae: { pro: '8000 3570 4807 x3',   premium: '8000 3570 4807 x4',   note: 'Toll free in UAE' }
+  };
+
+  const sel        = document.getElementById('country-select');
+  const proNum     = document.getElementById('pro-number');
+  const proNote    = document.getElementById('pro-note');
+  const premNum    = document.getElementById('premium-number');
+  const premNote   = document.getElementById('premium-note');
+
+  function updateNumbers() {
+    const d = phones[sel.value];
+    if (d) {
+      const note = sel.value === 'us' ? 'Toll free in the US' : 'Carrier rates may apply';
+      proNum.textContent   = d.pro;
+      proNote.textContent  = note;
+      premNum.textContent  = d.premium;
+      premNote.textContent = note;
+    }
+  }
+  sel.addEventListener('change', updateNumbers);
+  updateNumbers();
+
+  /* ── PROTOTYPE MODAL ── */
+  const overlay  = document.getElementById('proto-overlay');
+  const closeBtn = document.getElementById('proto-close');
+
+  function openModal(e) { e.preventDefault(); overlay.classList.add('open'); closeBtn.focus(); }
+  function closeModal()  { overlay.classList.remove('open'); }
+
+  // Intercept all <a> tags and .text-link spans/buttons
+  document.querySelectorAll('a, .text-link').forEach(el => {
+    el.addEventListener('click', openModal);
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Support</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:         #f8f5ee;
+  --text:       #1f1f1f;
+  --white:      #ffffff;
+  --premium-bg: #46062b;
+  --border:     rgba(0,0,0,0.47);
+  --shadow:     rgba(45,62,80,0.12);
+  --orange:     #FF4800;
+  --font:       'Lexend', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ─── PAGE ─── */
+.page-wrapper {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 36px 40px 60px;
+}
+
+.page-title {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 459px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ─── LEFT COL ─── */
+.left-col { display: flex; flex-direction: column; gap: 16px; }
+
+.intro-text { font-size: 16px; line-height: 28px; font-weight: 300; }
+
+a { color: var(--text); text-decoration: underline; text-decoration-skip-ink: none; cursor: pointer; }
+
+.item {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 12px;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  transition: outline 0.15s ease, box-shadow 0.15s ease;
+}
+
+.item.is-highlighted {
+  outline: 2px solid var(--text);
+  box-shadow: 0 2px 12px rgba(31,31,31,0.10);
+}
+
+.item-text { font-size: 16px; line-height: 28px; font-weight: 300; }
+.item-text strong { font-weight: 500; }
+
+/* Pro/Enterprise phone card internals */
+.phone-section { display: flex; flex-direction: column; gap: 6px; }
+.phone-header { font-size: 16px; line-height: 28px; font-weight: 300; }
+.phone-header strong { font-weight: 500; }
+.select-label { font-size: 16px; line-height: 28px; font-weight: 500; }
+
+.select-wrap { position: relative; }
+
+.country-select {
+  width: 100%;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--white);
+  padding: 0 40px 0 16px;
+  font-size: 16px;
+  font-family: var(--font);
+  font-weight: 300;
+  color: var(--text);
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.select-arrow {
+  position: absolute; right: 12px; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 20px; height: 20px;
+}
+
+.phone-number { font-size: 16px; line-height: 28px; font-weight: 500; min-height: 28px; }
+.phone-note   { font-size: 16px; line-height: 28px; font-weight: 300; }
+
+/* Premium card */
+.item-premium {
+  background: var(--premium-bg);
+  border-radius: 16px;
+  padding: 12px;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+  transition: outline 0.15s ease, box-shadow 0.15s ease;
+}
+
+.item-premium.is-highlighted {
+  outline: 2px solid var(--orange);
+  box-shadow: 0 2px 16px rgba(255,72,0,0.35);
+}
+
+.premium-inner { display: flex; flex-direction: column; gap: 6px; }
+.premium-title { font-size: 16px; line-height: 28px; font-weight: 300; color: var(--white); }
+.premium-title strong { font-weight: 500; }
+.premium-phone { font-size: 16px; line-height: 28px; font-weight: 500; color: var(--white); min-height: 28px; }
+.premium-note  { font-size: 12px; line-height: 20px; font-weight: 500; color: var(--white); }
+
+/* ─── RIGHT COL ─── */
+.right-col { display: flex; flex-direction: column; gap: 24px; }
+
+.table-card {
+  background: var(--white);
+  border-radius: 3px;
+  box-shadow: 0 1px 5px 0 var(--shadow);
+  overflow: hidden;
+}
+
+.support-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.support-table col.col-icon { width: 100px; }
+.support-table col.col-tier { width: auto; }
+
+.table-head th {
+  font-weight: 500; font-size: 14px; line-height: 24.5px;
+  text-align: center; color: var(--text);
+  padding: 22px 0 12px;
+  transition: background 0.15s ease;
+  cursor: default;
+}
+
+.table-head th.col-hovered { background: rgba(31,31,31,0.05); }
+
+.table-body td {
+  text-align: center;
+  padding: 14px 0;
+  vertical-align: middle;
+  border-top: 1px solid #f0ece3;
+  transition: background 0.15s ease;
+}
+
+.table-body td.col-hovered { background: rgba(31,31,31,0.03); }
+.table-body td:first-child  { padding: 6px 0; }
+
+.channel-cell {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 4px; padding: 6px 0;
+}
+
+.channel-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+.channel-icon svg { width: 24px; height: 24px; fill: var(--text); }
+.channel-label { font-weight: 300; font-size: 12px; line-height: 21px; text-align: center; white-space: nowrap; }
+
+.check { display: flex; align-items: center; justify-content: center; }
+.check svg { width: 16px; height: 16px; display: block; }
+
+/* Footnotes */
+.footnotes { display: flex; flex-direction: column; gap: 24px; padding: 0 24px; }
+.footnote-body { font-size: 16px; line-height: 28px; font-weight: 300; }
+.footnote-link { font-size: 16px; line-height: 28px; font-weight: 300; display: block; }
+
+/* ─── PROTOTYPE MODAL ─── */
+.proto-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(31,31,31,0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.proto-overlay.open { display: flex; }
+
+.proto-modal {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  box-shadow: 0 8px 40px rgba(31,31,31,0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: pop-in 0.18s ease;
+}
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.proto-modal-icon {
+  width: 40px; height: 40px;
+  background: #fff4f0;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.proto-modal-icon svg { width: 20px; height: 20px; }
+
+.proto-modal-title {
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 24px;
+}
+
+.proto-modal-body {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 22px;
+  color: #555;
+}
+.proto-modal-body strong { font-weight: 500; color: var(--text); }
+
+.proto-modal-footer { display: flex; justify-content: flex-end; padding-top: 4px; }
+
+.proto-modal-btn {
+  background: var(--text);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 9px 22px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.proto-modal-btn:hover { background: #3a3a3a; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .support-table col.col-icon { width: 80px; }
+  .table-head th { font-size: 12px; padding: 16px 0 10px; }
+  .table-body td { padding: 10px 0; }
+}
+@media (max-width: 480px) {
+  .page-wrapper { padding: 24px 16px 40px; }
+  .support-table col.col-icon { width: 64px; }
+  .table-head th { font-size: 11px; }
+  .channel-label { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+  <h1 class="page-title">Contact support</h1>
+
+  <div class="content-grid">
+
+    <!-- ── LEFT COLUMN ── -->
+    <div class="left-col">
+
+      <p class="intro-text">
+        Having trouble logging in? Try these <a href="#">troubleshooting steps</a>.
+      </p>
+
+      <div class="item" id="card-free">
+        <p class="item-text">
+          <strong>Free tools users</strong> and all View-only Seats users are supported by the <a href="#">Community</a>.
+        </p>
+      </div>
+
+      <div class="item" id="card-starter">
+        <p class="item-text">
+          <strong>Starter</strong> accounts are supported by the above + <a href="#">email and chat</a>.
+        </p>
+      </div>
+
+      <div class="item" id="card-pro">
+        <div class="phone-section">
+          <p class="phone-header">
+            <strong>Professional</strong> and <strong>Enterprise</strong> accounts are supported by the above + phone. Contact us:
+          </p>
+          <p class="select-label">Select your country</p>
+          <div class="select-wrap">
+            <select class="country-select" id="country-select">
+              <option value="us">United States</option>
+              <option value="au">Australia</option>
+              <option value="at">Austria</option>
+              <option value="be">Belgium</option>
+              <option value="br">Brazil</option>
+              <option value="ca">Canada</option>
+              <option value="cl">Chile</option>
+              <option value="co">Colombia</option>
+              <option value="dk">Denmark</option>
+              <option value="fi">Finland</option>
+              <option value="fr">France</option>
+              <option value="de">Germany</option>
+              <option value="hk">Hong Kong</option>
+              <option value="in">India</option>
+              <option value="id">Indonesia</option>
+              <option value="ie">Ireland</option>
+              <option value="il">Israel</option>
+              <option value="it">Italy</option>
+              <option value="jp">Japan</option>
+              <option value="lu">Luxembourg</option>
+              <option value="my">Malaysia</option>
+              <option value="mx">Mexico</option>
+              <option value="nl">Netherlands</option>
+              <option value="nz">New Zealand</option>
+              <option value="no">Norway</option>
+              <option value="pt">Portugal</option>
+              <option value="sg">Singapore</option>
+              <option value="za">South Africa</option>
+              <option value="es">Spain</option>
+              <option value="se">Sweden</option>
+              <option value="ch">Switzerland</option>
+              <option value="ae">UAE</option>
+              <option value="gb">United Kingdom</option>
+            </select>
+            <svg class="select-arrow" viewBox="0 0 20 20" fill="none">
+              <path d="M5 7.5L10 12.5L15 7.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="phone-number" id="pro-number">1-888-HUBSPOT x3 (1-888-482-7768 x3)</p>
+          <p class="phone-note">Please note that not all phone carriers allow toll-free dialing.</p>
+        </div>
+      </div>
+
+      <div class="item-premium" id="card-premium">
+        <div class="premium-inner">
+          <p class="premium-title">
+            <strong>Premium Support</strong> accounts are supported by the above + a dedicated phone line.
+          </p>
+          <p class="premium-phone" id="premium-number">1-888-482-7768 x4</p>
+          <p class="premium-note">Select Extension 4 from the main menu. You'll be asked to enter your Hub ID to verify your Premium Support access. Once verified, you'll connect directly to your dedicated team.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── RIGHT COLUMN ── -->
+    <div class="right-col">
+
+      <div class="table-card">
+        <table class="support-table">
+          <colgroup>
+            <col class="col-icon">
+            <col class="col-tier">
+            <col class="col-tier">
+            <col class="col-tier">
+            <col class="col-tier">
+          </colgroup>
+          <thead class="table-head">
+            <tr>
+              <th></th>
+              <th data-col="1" data-card="card-free">Free</th>
+              <th data-col="2" data-card="card-starter">Starter</th>
+              <th data-col="3" data-card="card-pro">Pro/Enterprise</th>
+              <th data-col="4" data-card="card-premium">Premium</th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <!-- Community -->
+            <tr>
+              <td>
+                <div class="channel-cell">
+                  <div class="channel-icon">
+                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                  </div>
+                  <span class="channel-label">Community</span>
+                </div>
+              </td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+            </tr>
+            <!-- Email -->
+            <tr>
+              <td>
+                <div class="channel-cell">
+                  <div class="channel-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                  </div>
+                  <span class="channel-label">Email</span>
+                </div>
+              </td>
+              <td></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+            </tr>
+            <!-- Chat -->
+            <tr>
+              <td>
+                <div class="channel-cell">
+                  <div class="channel-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+                  </div>
+                  <span class="channel-label">Chat</span>
+                </div>
+              </td>
+              <td></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+            </tr>
+            <!-- Phone -->
+            <tr>
+              <td>
+                <div class="channel-cell">
+                  <div class="channel-icon">
+                    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                  </div>
+                  <span class="channel-label">Phone</span>
+                </div>
+              </td>
+              <td></td>
+              <td></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+              <td><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 4.5" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footnotes">
+        <p class="footnote-body">
+          View-only Seats users do not have access to email, chat, or phone support. If you have multiple HubSpot products, your support options are based on your highest subscription. Learn more about <a href="#">getting help with HubSpot</a>.
+        </p>
+        <a href="#" class="footnote-link">Support Hours and Observed Holidays</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── PROTOTYPE MODAL ── -->
+<div class="proto-overlay" id="proto-overlay" role="dialog" aria-modal="true" aria-labelledby="proto-title">
+  <div class="proto-modal">
+    <div class="proto-modal-icon">
+      <svg viewBox="0 0 20 20" fill="none">
+        <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm.75 12h-1.5V9.25h1.5V14zm0-6.25h-1.5v-1.5h1.5v1.5z" fill="#FF4800"/>
+      </svg>
+    </div>
+    <p class="proto-modal-title" id="proto-title">This is a prototype</p>
+    <p class="proto-modal-body">
+      You're viewing a prototype. Links and navigation are not active.
+    </p>
+    <div class="proto-modal-footer">
+      <button class="proto-modal-btn" id="proto-close">Ok</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ── PHONE DATA ──
+   * Country list: help.hubspot.com (33 countries)
+   * NOTE FOR TEAM: numbers below are based on HubSpot's known regional
+   * toll-free lines. Please verify with Support Ops before shipping.
+   * Pro/Enterprise = x3 | Premium = x4
+   */
+  const phones = {
+    us: { pro: '1-888-HUBSPOT x3 (1-888-482-7768 x3)', premium: '1-888-482-7768 x4' },
+    ca: { pro: '1-888-HUBSPOT x3 (1-888-482-7768 x3)', premium: '1-888-482-7768 x4' },
+    gb: { pro: '+44 800 032 6560 x3',                  premium: '+44 800 032 6560 x4' },
+    au: { pro: '1-800-896-938 x3',                     premium: '1-800-896-938 x4' },
+    nz: { pro: '0800-171-871 x3',                      premium: '0800-171-871 x4' },
+    de: { pro: '+49 800 000 6982 x3',                  premium: '+49 800 000 6982 x4' },
+    fr: { pro: '+33 800 940 692 x3',                   premium: '+33 800 940 692 x4' },
+    nl: { pro: '+31 800 020 2202 x3',                  premium: '+31 800 020 2202 x4' },
+    ie: { pro: '+353 1800 719 566 x3',                 premium: '+353 1800 719 566 x4' },
+    it: { pro: '+39 800 693 076 x3',                   premium: '+39 800 693 076 x4' },
+    es: { pro: '+34 900 838 597 x3',                   premium: '+34 900 838 597 x4' },
+    pt: { pro: '+351 800 780 764 x3',                  premium: '+351 800 780 764 x4' },
+    be: { pro: '+32 800 761 45 x3',                    premium: '+32 800 761 45 x4' },
+    at: { pro: '+43 800 802 561 x3',                   premium: '+43 800 802 561 x4' },
+    ch: { pro: '+41 800 000 401 x3',                   premium: '+41 800 000 401 x4' },
+    se: { pro: '+46 200 883 185 x3',                   premium: '+46 200 883 185 x4' },
+    no: { pro: '+47 800 16 174 x3',                    premium: '+47 800 16 174 x4' },
+    dk: { pro: '+45 80 82 00 10 x3',                   premium: '+45 80 82 00 10 x4' },
+    fi: { pro: '+358 800 912 683 x3',                  premium: '+358 800 912 683 x4' },
+    lu: { pro: '+352 800 277 56 x3',                   premium: '+352 800 277 56 x4' },
+    br: { pro: '0800 047 4744 x3',                     premium: '0800 047 4744 x4' },
+    mx: { pro: '800-461-0524 x3',                      premium: '800-461-0524 x4' },
+    co: { pro: '01800-952-1562 x3',                    premium: '01800-952-1562 x4' },
+    cl: { pro: '1230-020-9626 x3',                     premium: '1230-020-9626 x4' },
+    jp: { pro: '0120-700-779 x3',                      premium: '0120-700-779 x4' },
+    sg: { pro: '800 492 1669 x3',                      premium: '800 492 1669 x4' },
+    hk: { pro: '800 960 254 x3',                       premium: '800 960 254 x4' },
+    in: { pro: '000-800-440-1938 x3',                  premium: '000-800-440-1938 x4' },
+    my: { pro: '1800-81-5083 x3',                      premium: '1800-81-5083 x4' },
+    id: { pro: '007-803-321-5527 x3',                  premium: '007-803-321-5527 x4' },
+    il: { pro: '1-800-945-503 x3',                     premium: '1-800-945-503 x4' },
+    za: { pro: '0800-014-564 x3',                      premium: '0800-014-564 x4' },
+    ae: { pro: '8000 3570 4807 x3',                    premium: '8000 3570 4807 x4' }
+  };
+
+  const sel        = document.getElementById('country-select');
+  const proNum     = document.getElementById('pro-number');
+  const premNum    = document.getElementById('premium-number');
+
+  function updateNumbers() {
+    const d = phones[sel.value];
+    if (d) { proNum.textContent = d.pro; premNum.textContent = d.premium; }
+  }
+  sel.addEventListener('change', updateNumbers);
+  updateNumbers();
+
+  /* ── TABLE HOVER ── */
+  const colToCard = { '1':'card-free', '2':'card-starter', '3':'card-pro', '4':'card-premium' };
+  const headerThs = document.querySelectorAll('.table-head th[data-col]');
+  const bodyRows  = document.querySelectorAll('.table-body tr');
+
+  function applyHover(colNum, on) {
+    const cardId = colToCard[colNum];
+    // Left card
+    const card = document.getElementById(cardId);
+    if (card) card.classList.toggle('is-highlighted', on);
+    // Header cell
+    headerThs.forEach(th => {
+      if (th.getAttribute('data-col') === colNum) th.classList.toggle('col-hovered', on);
+    });
+    // Body cells
+    const idx = parseInt(colNum, 10); // 1 = second <td>
+    bodyRows.forEach(row => {
+      const cell = row.querySelectorAll('td')[idx];
+      if (cell) cell.classList.toggle('col-hovered', on);
+    });
+  }
+
+  headerThs.forEach(th => {
+    const col = th.getAttribute('data-col');
+    th.addEventListener('mouseenter', () => applyHover(col, true));
+    th.addEventListener('mouseleave', () => applyHover(col, false));
+  });
+
+  /* ── PROTOTYPE MODAL ── */
+  const overlay  = document.getElementById('proto-overlay');
+  const closeBtn = document.getElementById('proto-close');
+
+  function openModal(e) { e.preventDefault(); overlay.classList.add('open'); closeBtn.focus(); }
+  function closeModal()  { overlay.classList.remove('open'); }
+
+  document.querySelectorAll('a').forEach(a => a.addEventListener('click', openModal));
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
