@@ -189,9 +189,9 @@ body {
 }
 .phone-row { display: flex; gap: 24px; align-items: center; }
 
-.select-wrap { position: relative; width: 250px; flex-shrink: 0; }
+.select-wrap { position: relative; }
 .country-select {
-  width: 100%; height: 40px;
+  height: 40px;
   background: var(--container-02);
   border: 1px solid var(--border-input);
   border-radius: 4px;
@@ -269,16 +269,29 @@ body {
   display: flex; align-items: center; justify-content: center;
   padding: 10px; min-height: 40px;
 }
-.tcell.label {
-  width: 150px; flex-shrink: 0; justify-content: flex-start;
-  font-size: 14px; font-weight: 300; line-height: 22px; color: var(--text-01);
+
+/* First cell in every row — fixed width, left-aligned label */
+.tcell:first-child {
+  width: 150px;
+  flex-shrink: 0;
+  justify-content: flex-start;
+  font-size: 14px; font-weight: 600; line-height: 20px;
+  color: var(--text-01); letter-spacing: 0.1px;
 }
-.tcell.col {
+
+/* Data / tier cells — equal flex, centered */
+.tcell:not(:first-child) {
   flex: 1;
   font-size: 14px; font-weight: 600; line-height: 20px;
   color: var(--text-01); text-align: center; letter-spacing: 0.1px;
 }
-/* Header cells use container-02 tint */
+
+/* Body label cells — lighter weight */
+.trow:not(.head) .tcell:first-child {
+  font-weight: 300;
+}
+
+/* Header row background tint */
 .trow.head .tcell { background: var(--container-02); }
 
 .check-circle { width: 24px; height: 24px; flex-shrink: 0; }
@@ -294,6 +307,39 @@ body {
   text-decoration-color: var(--text-01);
   color: var(--text-01); cursor: pointer;
 }
+
+/* ── HOVER HIGHLIGHT ── */
+
+/* White cards */
+.text-item, .pro-card {
+  transition: outline 0.15s ease, box-shadow 0.15s ease;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+}
+.text-item.is-highlighted {
+  outline: 2px solid var(--text-01);
+  box-shadow: 0 2px 12px rgba(31,31,31,0.10);
+}
+.pro-card.is-highlighted {
+  outline: 2px solid var(--text-01);
+  box-shadow: 0 2px 12px rgba(31,31,31,0.10);
+}
+
+/* Premium dark card */
+.premium-card {
+  transition: outline 0.15s ease, box-shadow 0.15s ease;
+  outline: 2px solid transparent;
+  outline-offset: 0;
+}
+.premium-card.is-highlighted {
+  outline: 2px solid var(--orange);
+  box-shadow: 0 2px 16px rgba(255,72,0,0.35);
+}
+
+/* Table column hover tint */
+.tcell.col-hovered { background: rgba(31,31,31,0.04); transition: background 0.15s ease; }
+.trow.head .tcell.col-hovered { background: rgba(31,31,31,0.08); }
+.trow.head .tcell[data-col] { cursor: default; transition: background 0.15s ease; }
 
 /* ── PROTOTYPE MODAL ── */
 .proto-overlay {
@@ -355,87 +401,72 @@ body {
     <!-- LEFT -->
     <div class="left-col">
 
-      <div class="text-item">
+      <div class="text-item" id="card-free">
         <span class="tier-free">Free tools users</span> and all View-only Seats users are supported by the <a href="#">Community.</a>
       </div>
 
-      <div class="text-item">
+      <div class="text-item" id="card-starter">
         <span class="tier-starter">Starter</span> accounts are supported by the above + <a href="#">email</a>&nbsp;&nbsp;and <a href="#">chat.</a>
       </div>
 
-      <div class="pro-card">
+      <div class="pro-card" id="card-pro">
         <p class="pro-card-heading">
           <span class="tier-pro">Professional / Enterprise</span> accounts are supported by the above + <a href="#">phone.</a>
         </p>
 
         <div class="pro-inner">
 
-          <div class="pro-inner">
-            <div class="links-row">
-              <span class="text-link" role="button">
-                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 1.5a6.5 6.5 0 0 1 5.23 10.37C12.2 10.4 10.23 9.5 8 9.5s-4.2.9-5.23 2.37A6.5 6.5 0 0 1 8 1.5zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/></svg>
-                Visit Community
-              </span>
-              <span class="text-link" role="button">
-                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 2h-11A1.5 1.5 0 0 0 1 3.5v9A1.5 1.5 0 0 0 2.5 14h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 13.5 2zm0 1.5L8 8.34 2.5 3.5h11zM2.5 12.5v-7.4l5.19 4.56a.5.5 0 0 0 .62 0L13.5 5.1v7.4h-11z"/></svg>
-                Send email
-              </span>
-              <span class="text-link" role="button">
-                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14 1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2v3l3-3h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm-1 8.5H5.62L4.5 10.62V9.5H2.5v-7h11v7z"/></svg>
-                Start chat
-              </span>
-            </div>
-
-            <div class="phone-inner">
-              <p class="phone-inner-title">Phone Support by country</p>
-              <div class="phone-row">
-                <div class="select-wrap">
-                  <select class="country-select" id="country-select">
-                    <option value="us">United States</option>
-                    <option value="au">Australia</option>
-                    <option value="at">Austria</option>
-                    <option value="be">Belgium</option>
-                    <option value="br">Brazil</option>
-                    <option value="ca">Canada</option>
-                    <option value="cl">Chile</option>
-                    <option value="co">Colombia</option>
-                    <option value="dk">Denmark</option>
-                    <option value="fi">Finland</option>
-                    <option value="fr">France</option>
-                    <option value="de">Germany</option>
-                    <option value="hk">Hong Kong</option>
-                    <option value="in">India</option>
-                    <option value="id">Indonesia</option>
-                    <option value="ie">Ireland</option>
-                    <option value="il">Israel</option>
-                    <option value="it">Italy</option>
-                    <option value="jp">Japan</option>
-                    <option value="lu">Luxembourg</option>
-                    <option value="my">Malaysia</option>
-                    <option value="mx">Mexico</option>
-                    <option value="nl">Netherlands</option>
-                    <option value="nz">New Zealand</option>
-                    <option value="no">Norway</option>
-                    <option value="pt">Portugal</option>
-                    <option value="sg">Singapore</option>
-                    <option value="za">South Africa</option>
-                    <option value="es">Spain</option>
-                    <option value="se">Sweden</option>
-                    <option value="ch">Switzerland</option>
-                    <option value="ae">UAE</option>
-                    <option value="gb">United Kingdom</option>
-                  </select>
-                  <svg class="select-arrow" viewBox="0 0 24 24" fill="none">
-                    <path d="M6 9L12 15L18 9" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <p class="phone-number" id="pro-number">1-888-HUBSPOT x3&#10;(1-888-482-7768 x3)</p>
+          <!-- Phone section -->
+          <div class="phone-inner">
+            <p class="phone-inner-title">Phone Support by country</p>
+            <div class="phone-row">
+              <div class="select-wrap" style="flex:1;">
+                <select class="country-select" id="country-select" style="width:100%;">
+                  <option value="us">United States</option>
+                  <option value="au">Australia</option>
+                  <option value="at">Austria</option>
+                  <option value="be">Belgium</option>
+                  <option value="br">Brazil</option>
+                  <option value="ca">Canada</option>
+                  <option value="cl">Chile</option>
+                  <option value="co">Colombia</option>
+                  <option value="dk">Denmark</option>
+                  <option value="fi">Finland</option>
+                  <option value="fr">France</option>
+                  <option value="de">Germany</option>
+                  <option value="hk">Hong Kong</option>
+                  <option value="in">India</option>
+                  <option value="id">Indonesia</option>
+                  <option value="ie">Ireland</option>
+                  <option value="il">Israel</option>
+                  <option value="it">Italy</option>
+                  <option value="jp">Japan</option>
+                  <option value="lu">Luxembourg</option>
+                  <option value="my">Malaysia</option>
+                  <option value="mx">Mexico</option>
+                  <option value="nl">Netherlands</option>
+                  <option value="nz">New Zealand</option>
+                  <option value="no">Norway</option>
+                  <option value="pt">Portugal</option>
+                  <option value="sg">Singapore</option>
+                  <option value="za">South Africa</option>
+                  <option value="es">Spain</option>
+                  <option value="se">Sweden</option>
+                  <option value="ch">Switzerland</option>
+                  <option value="ae">UAE</option>
+                  <option value="gb">United Kingdom</option>
+                </select>
+                <svg class="select-arrow" viewBox="0 0 24 24" fill="none">
+                  <path d="M6 9L12 15L18 9" stroke="#1f1f1f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </div>
-              <p class="phone-note" id="pro-note">Toll free in the US. Carrier rates may apply internationally.</p>
+              <p class="phone-number" id="pro-number">1-888-HUBSPOT x3&#10;(1-888-482-7768 x3)</p>
             </div>
+            <p class="phone-note" id="pro-note">Toll free in the US. Carrier rates may apply internationally.</p>
           </div>
 
-          <div class="premium-card">
+          <!-- Premium card -->
+          <div class="premium-card" id="card-premium">
             <div class="premium-header-row">
               <p class="premium-title">Premium Support</p>
               <span class="premium-tag">Add-on plan</span>
@@ -460,47 +491,47 @@ body {
 
         <!-- header -->
         <div class="trow head">
-          <div class="tcell label col" style="justify-content:flex-start;">Channel</div>
-          <div class="tcell col">Free</div>
-          <div class="tcell col">Starter</div>
-          <div class="tcell col">Pro/Ent</div>
-          <div class="tcell col">Premium</div>
+          <div class="tcell">Channel</div>
+          <div class="tcell" data-col="1">Free</div>
+          <div class="tcell" data-col="2">Starter</div>
+          <div class="tcell" data-col="3">Pro/Ent</div>
+          <div class="tcell" data-col="4">Premium</div>
         </div>
 
         <!-- Community -->
         <div class="trow">
-          <div class="tcell label">Community</div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell">Community</div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
         <!-- Email & Chat -->
         <div class="trow">
-          <div class="tcell label">Email &amp; Chat</div>
-          <div class="tcell col"></div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell">Email &amp; Chat</div>
+          <div class="tcell"></div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
         <!-- Phone -->
         <div class="trow">
-          <div class="tcell label">Phone</div>
-          <div class="tcell col"></div>
-          <div class="tcell col"></div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell">Phone</div>
+          <div class="tcell"></div>
+          <div class="tcell"></div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
         <!-- Dedicated line -->
         <div class="trow">
-          <div class="tcell label">Dedicated line</div>
-          <div class="tcell col"></div>
-          <div class="tcell col"></div>
-          <div class="tcell col"></div>
-          <div class="tcell col"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="tcell">Dedicated line</div>
+          <div class="tcell"></div>
+          <div class="tcell"></div>
+          <div class="tcell"></div>
+          <div class="tcell"><svg class="check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#2d7a4f"/><path d="M7.5 12.5l3 3 6-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
 
       </div>
@@ -584,6 +615,42 @@ body {
   }
   sel.addEventListener('change', updateNumbers);
   updateNumbers();
+
+  /* ── TABLE HOVER ── */
+  /*
+   * col 1 = Free      → card-free
+   * col 2 = Starter   → card-starter
+   * col 3 = Pro/Ent   → card-pro
+   * col 4 = Premium   → card-premium (nested inside card-pro, highlighted separately)
+   */
+  const colToCard = { '1': 'card-free', '2': 'card-starter', '3': 'card-pro', '4': 'card-premium' };
+
+  const headerCells = document.querySelectorAll('.trow.head .tcell[data-col]');
+  const bodyRows    = document.querySelectorAll('.channel-table .trow:not(.head)');
+
+  function applyHover(col, on) {
+    // Highlight the left card
+    const card = document.getElementById(colToCard[col]);
+    if (card) card.classList.toggle('is-highlighted', on);
+
+    // Tint the header cell
+    headerCells.forEach(th => {
+      if (th.getAttribute('data-col') === col) th.classList.toggle('col-hovered', on);
+    });
+
+    // Tint body cells in this column (col index: 1-based after the label cell)
+    const idx = parseInt(col, 10); // label is index 0, data cols start at 1
+    bodyRows.forEach(row => {
+      const cells = row.querySelectorAll('.tcell');
+      if (cells[idx]) cells[idx].classList.toggle('col-hovered', on);
+    });
+  }
+
+  headerCells.forEach(th => {
+    const col = th.getAttribute('data-col');
+    th.addEventListener('mouseenter', () => applyHover(col, true));
+    th.addEventListener('mouseleave', () => applyHover(col, false));
+  });
 
   /* modal */
   const overlay  = document.getElementById('proto-overlay');
