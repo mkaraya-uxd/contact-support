@@ -8,7 +8,7 @@ This repository hosts 4 HTML prototypes of a redesigned **Contact Support** page
 
 | Variant | Description | Link |
 |---------|-------------|------|
-| **V1** | Original layout with support tier matrix table | [View V2](./contact-support.html) |
+| **V1** | Original layout with support tier matrix table | [View V1](./contact-support.html) |
 | **V2** | Original layout with support tier matrix table (Pro & Enterprise merged) | [View V2](./contact-support-v2.html) |
 | **V3** | Card-based layout — account tiers as interactive cards with channel links | [View V3](./contact-support-v3.html) |
 | **V4** | Tiered list + channel comparison table with green check indicators | [View V4](./contact-support-v4.html) |
