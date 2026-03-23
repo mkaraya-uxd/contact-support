@@ -557,6 +557,17 @@ a { color: var(--text); text-decoration: underline; text-decoration-skip-ink: no
     th.addEventListener('mouseleave', () => applyHover(col, false));
   });
 
+  // Extend hover to entire column — attach to every body cell too
+  bodyRows.forEach(row => {
+    row.querySelectorAll('td').forEach((cell, i) => {
+      if (i === 0) return; // skip the icon/label cell
+      const col = String(i);
+      cell.style.cursor = 'default';
+      cell.addEventListener('mouseenter', () => applyHover(col, true));
+      cell.addEventListener('mouseleave', () => applyHover(col, false));
+    });
+  });
+
   /* ── PROTOTYPE MODAL ── */
   const overlay  = document.getElementById('proto-overlay');
   const closeBtn = document.getElementById('proto-close');
